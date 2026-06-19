@@ -1,0 +1,19 @@
+name: "@foundrynet/oss-intel"
+displayName: "Open Source Intelligence MCP"
+description: >-
+  Open source intelligence for AI agents — GitHub project-health scoring (stars,
+  activity, contributors, license), package dependency-risk analysis (npm, PyPI,
+  cargo), trending repositories, license checks, and side-by-side package
+  comparison. Built on the GitHub API, PyPI, the npm registry, and libraries.io.
+  Part of the FoundryNet Data Network. Free tier then x402 (USDC on Solana).
+startCommand:
+  type: http
+  url: "https://oss-intel-mcp-production.up.railway.app/mcp"
+  transport: streamable-http
+  configSchema:
+    type: object
+    properties:
+      api_key:
+        type: string
+        title: "Forge billing key (optional)"
+        description: "fnet_ key to bypass the per-query x402 paywall and bill to a Forge account."
