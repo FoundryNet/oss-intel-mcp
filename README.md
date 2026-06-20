@@ -10,8 +10,21 @@ side-by-side package comparison.
 > **financial-signals-mcp**, **weather-intel-mcp**, **compliance-mcp**,
 > **brand-intel-mcp**, **academic-intel-mcp**, **fact-check-mcp**, **social-intel-mcp**.
 
-Live MCP endpoint (Streamable HTTP):
-`https://oss-intel-mcp-production.up.railway.app/mcp`
+## Connect
+
+- **MCP endpoint** (Streamable HTTP): `https://oss-intel-mcp-production.up.railway.app/mcp`
+- **Registry:** `io.github.FoundryNet/oss-intel-mcp`
+- **Agent card:** `https://oss-intel-mcp-production.up.railway.app/.well-known/agent-card.json`
+
+### Claude Desktop / Cursor / Claude Code
+
+```
+claude mcp add --transport http oss-intel https://oss-intel-mcp-production.up.railway.app/mcp
+```
+
+```json
+{ "mcpServers": { "oss-intel": { "url": "https://oss-intel-mcp-production.up.railway.app/mcp" } } }
+```
 
 ## Tools
 
@@ -46,12 +59,11 @@ commits, search — keyless low-rate, optional `GITHUB_TOKEN` for higher limits)
 (cross-ecosystem dependents/SourceRank/deprecation — optional `LIBRARIESIO_API_KEY`,
 degrades gracefully if unset). Stored in a standalone Supabase project.
 
-## Connect
-
-Smithery: `@foundrynet/oss-intel` · MCP registry: `io.github.FoundryNet/oss-intel-mcp`
-
-```json
-{ "mcpServers": { "oss-intel": { "url": "https://oss-intel-mcp-production.up.railway.app/mcp" } } }
-```
+MCP registry: `io.github.FoundryNet/oss-intel-mcp`
 
 Built by [FoundryNet](https://foundrynet.io) · hello@foundrynet.io
+
+## Live network activity
+
+**Live feed:** [mint.foundrynet.io/feed](https://mint.foundrynet.io/feed)  
+Real-time verified work across 13 servers and autonomous agents, anchored on Solana via [MINT Protocol](https://mint.foundrynet.io).

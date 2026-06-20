@@ -11,10 +11,11 @@ def register(mcp) -> None:
         agent_id: Optional[str] = None,
         payment_tx: Optional[str] = None,
     ) -> dict:
-        """Health snapshot for a GitHub repository — stars, forks, open issues,
-        commit frequency, last commit date, contributor count, license, and a
-        0-100 composite health_score (popularity + activity + maintenance +
+        """Check open-source project health for a GitHub repository — stars, forks,
+        open issues, commit frequency, last commit date, contributor count, license,
+        and a 0-100 composite health_score (popularity + activity + maintenance +
         governance). The "is this project alive and worth depending on?" tool.
+        Source: GitHub API.
 
         PAID: $0.01 USDC per query after a daily free allowance (25/day). On a 402,
         pay the returned Solana memo and re-call with the SAME args plus

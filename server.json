@@ -2,8 +2,12 @@
   "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.FoundryNet/oss-intel-mcp",
   "title": "Open Source Intelligence MCP",
-  "description": "GitHub project health, package dependency risk, trending repos, license & package comparison.",
+  "description": "Check open-source project health, dependency vulnerability/risk, trending repos, and license compatibility — from GitHub, PyPI, npm, and libraries.io.",
   "version": "1.0.0",
+  "homepage": "https://foundrynet.io",
   "repository": { "url": "https://github.com/FoundryNet/oss-intel-mcp", "source": "github" },
+  "categories": ["developer-tools", "open-source", "data", "security"],
+  "tags": ["open source", "GitHub", "dependency risk", "package health", "vulnerability check", "license check", "npm", "PyPI"],
+  "keywords": ["open source", "GitHub", "dependency risk", "package health", "vulnerability check", "license check", "npm", "PyPI"],
   "remotes": [ { "type": "streamable-http", "url": "https://oss-intel-mcp-production.up.railway.app/mcp" } ]
 }

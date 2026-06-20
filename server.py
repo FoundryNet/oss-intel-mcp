@@ -155,21 +155,31 @@ async def admin_aggregate(request: Request) -> JSONResponse:
 
 # ── Discovery ────────────────────────────────────────────────────────────────
 _TAGLINE = "Open source intelligence for agents — project health, dependency risk, trending repos."
-_DESC = ("Open source intelligence for agents: GitHub project health scoring, package "
-         "dependency-risk analysis (npm/PyPI/cargo), trending repositories, license checks, and "
-         "side-by-side package comparison. Repos and packages scored for health and risk. Part of "
-         "the FoundryNet Data Network — attest analysis with MINT Protocol; see also gov-contracts, "
-         "cyber-intel, patent-intel, financial-signals, compliance.")
-_KEYWORDS = ["open source intelligence", "github", "project health", "dependency risk",
-             "npm", "pypi", "trending repos", "license check", "package comparison"]
+_DESC = ("Check open-source project health, dependency vulnerability/risk, trending repos, and "
+         "license compatibility — from GitHub, PyPI, npm, and libraries.io. Repos and packages "
+         "scored for health and risk. Part of the FoundryNet Data Network — attest analysis with "
+         "MINT Protocol; see also gov-contracts, cyber-intel, patent-intel, financial-signals, compliance.")
+_KEYWORDS = ["open source", "github", "dependency risk", "package health", "vulnerability check",
+             "license check", "npm", "pypi"]
 
 _AGENT_CARD = {
-    "name": "Open Source Intelligence MCP", "description": _DESC,
-    "url": "https://github.com/FoundryNet/oss-intel-mcp",
-    "capabilities": ["open_source_intelligence", "project_health", "dependency_risk",
-                     "trending_repos", "license_analysis", "package_comparison"],
+    "name": "Open Source Intelligence MCP",
+    "description": ("Check open-source project health, dependency vulnerability/risk, trending "
+                    "repos, and license compatibility — from GitHub, PyPI, npm, and libraries.io."),
+    "url": "https://oss-intel-mcp-production.up.railway.app/mcp",
+    "version": "1.0.0",
+    "capabilities": {
+        "tools": ["project_health", "dependency_risk", "trending_repos", "license_check",
+                  "compare_packages", "daily_brief", "mint_info"],
+    },
+    "provider": {"name": "FoundryNet", "url": "https://foundrynet.io"},
     "network": "FoundryNet Data Network",
-    "protocols": {"mcp": {"endpoint": config.PUBLIC_MCP_URL, "transport": "streamable-http", "tools_count": 6},
+    "attestation": {
+        "protocol": "MINT Protocol",
+        "endpoint": "https://mint-mcp-production.up.railway.app/mcp",
+        "verified_outputs": True, "live_feed": "https://mint.foundrynet.io/feed", "feed_api": "https://mint-mcp-production.up.railway.app/v1/feed",
+    },
+    "protocols": {"mcp": {"endpoint": config.PUBLIC_MCP_URL, "transport": "streamable-http", "tools_count": 7},
                   "x402": {"supported": True, "currency": "USDC", "network": "solana"}},
     "see_also": config.SISTER_SERVERS, "mint_protocol": config.MINT_MCP_URL,
     "contact": "hello@foundrynet.io",
@@ -208,7 +218,7 @@ async def server_card(request: Request) -> JSONResponse:
         "tagline": _TAGLINE, "description": _DESC,
         "serverUrl": config.PUBLIC_MCP_URL, "transport": "streamable-http",
         "tools_count": len(live),
-        "categories": ["developer-tools", "open-source", "data", "devops", "supply-chain"],
+        "categories": ["developer-tools", "open-source", "data", "security"],
         "keywords": _KEYWORDS, "network": "FoundryNet Data Network",
         "see_also": config.SISTER_SERVERS,
         "pricing": {"model": "metered",
@@ -226,6 +236,31 @@ async def _agg_loop():
                 await agg.run_aggregation()
         except Exception as e:  # noqa: BLE001
             logger.warning(f"agg loop: {e}")
+
+
+_FREE_TOOL_NAMES = {"mint_info", "macro_dashboard", "cve_detail", "detail",
+                    "domain_age", "convert", "rates", "market_overview", "price",
+                    "quote", "batch_quote", "sector_performance"}
+
+
+@mcp.custom_route("/.well-known/mcp.json", methods=["GET"])
+async def wellknown_mcp_json(request: Request) -> JSONResponse:
+    """Machine-discovery card (emerging standard) for AI clients/crawlers."""
+    live = await _live_tools()
+    names = [t["name"] for t in live]
+    return JSONResponse({
+        "name": _AGENT_CARD["name"],
+        "description": _AGENT_CARD["description"],
+        "url": config.PUBLIC_MCP_URL,
+        "transport": ["streamable-http"],
+        "tools": names,
+        "pricing": {"model": "per-query", "free_tier": True,
+                    "paid_tools": [n for n in names if n not in _FREE_TOOL_NAMES]},
+        "attestation": {"enabled": True, "protocol": "MINT Protocol",
+                        "feed": "https://mint.foundrynet.io/feed"},
+        "network": {"name": "FoundryNet Data Network", "servers": 17,
+                    "homepage": "https://foundrynet.io"},
+    }, headers={"Cache-Control": "public, max-age=300"})
 
 
 def build_dual_app():

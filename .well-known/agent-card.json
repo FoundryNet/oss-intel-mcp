@@ -1,12 +1,21 @@
 {
   "name": "Open Source Intelligence MCP",
-  "description": "Open source intelligence for agents: GitHub project health, package dependency risk (npm/PyPI/cargo), trending repos, license checks, and package comparison. Part of the FoundryNet Data Network.",
-  "url": "https://github.com/FoundryNet/oss-intel-mcp",
-  "capabilities": [
-    "open_source_intelligence", "project_health", "dependency_risk",
-    "trending_repos", "license_analysis", "package_comparison"
-  ],
+  "description": "Check open-source project health, dependency vulnerability/risk, trending repos, and license compatibility — from GitHub, PyPI, npm, and libraries.io.",
+  "url": "https://oss-intel-mcp-production.up.railway.app/mcp",
+  "version": "1.0.0",
+  "capabilities": {
+    "tools": [
+      "project_health", "dependency_risk", "trending_repos", "license_check",
+      "compare_packages", "daily_brief", "mint_info"
+    ]
+  },
+  "provider": { "name": "FoundryNet", "url": "https://foundrynet.io" },
   "network": "FoundryNet Data Network",
+  "attestation": {
+    "protocol": "MINT Protocol",
+    "endpoint": "https://mint-mcp-production.up.railway.app/mcp",
+    "verified_outputs": true
+  },
   "see_also": {
     "gov-contracts-mcp": "https://gov-contracts-mcp-production.up.railway.app/mcp",
     "brand-intel-mcp": "https://brand-intel-mcp-production.up.railway.app/mcp",
@@ -21,7 +30,7 @@
   },
   "mint_protocol": "https://mint-mcp-production.up.railway.app/mcp",
   "protocols": {
-    "mcp": { "endpoint": "https://oss-intel-mcp-production.up.railway.app/mcp", "transport": "streamable-http", "tools_count": 6 },
+    "mcp": { "endpoint": "https://oss-intel-mcp-production.up.railway.app/mcp", "transport": "streamable-http", "tools_count": 7 },
     "x402": { "supported": true, "currency": "USDC", "network": "solana" }
   },
   "contact": "hello@foundrynet.io"

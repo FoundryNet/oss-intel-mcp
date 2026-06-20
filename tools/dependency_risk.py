@@ -12,10 +12,10 @@ def register(mcp) -> None:
         agent_id: Optional[str] = None,
         payment_tx: Optional[str] = None,
     ) -> dict:
-        """Risk profile for a software package — maintenance status, last update,
-        download trends, dependents, deprecation status, and a 0-100 risk_score
-        (higher = riskier). The "should I add this dependency?" tool. Sources:
-        PyPI/npm registry + libraries.io.
+        """Analyze dependency vulnerability/risk for a software package — maintenance
+        status, last update, download trends, dependents, deprecation status, and a
+        0-100 risk_score (higher = riskier). The "should I add this dependency?" tool.
+        Sources: PyPI, npm registry, libraries.io.
 
         PAID: $0.02 USDC per query after the daily free allowance (25/day). On a
         402, pay the returned Solana memo and re-call with the SAME args plus

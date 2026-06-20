@@ -11,11 +11,11 @@ def register(mcp) -> None:
         agent_id: Optional[str] = None,
         payment_tx: Optional[str] = None,
     ) -> dict:
-        """The curated daily oss-intel brief — the day's most significant
-        open-source signals in one package: top trending repositories, notable
-        dependency risks, newly deprecated packages, and the biggest-growth
-        projects. Each brief carries a MINT provenance attestation so a buyer can
-        verify it was produced by this server, unaltered.
+        """Get the curated daily open-source intelligence brief — the day's most
+        significant signals in one package: top trending repos, notable dependency
+        risks, newly deprecated packages, and the biggest-growth projects. From
+        GitHub, PyPI, npm, and libraries.io. Each brief carries a MINT provenance
+        attestation so a buyer can verify it was produced by this server, unaltered.
 
         PAID: $5 USDC per brief. Defaults to today (UTC); a brief expires at the
         next midnight UTC. On a 402, pay the returned Solana memo and re-call with

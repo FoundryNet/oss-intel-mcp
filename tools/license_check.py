@@ -11,9 +11,9 @@ def register(mcp) -> None:
         agent_id: Optional[str] = None,
         payment_tx: Optional[str] = None,
     ) -> dict:
-        """License analysis for a GitHub repository — detected license type,
-        permissions, restrictions, commercial-use eligibility, and compatibility
-        guidance (permissive vs copyleft). FREE.
+        """Check open-source license compatibility for a GitHub repository — detected
+        license type, permissions, restrictions, commercial-use eligibility, and
+        compatibility guidance (permissive vs copyleft). Source: GitHub API. FREE.
 
         Args:
             repo: GitHub repository as "owner/name", e.g. "facebook/react".
